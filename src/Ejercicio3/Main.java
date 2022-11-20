@@ -16,15 +16,21 @@ public class Main implements Runnable {
                 }
             }
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
 
     public static void main(String[] args) {
         Main main = new Main();
+        Thread world = new Thread(main);
         Thread hello = new Thread(main);
         hello.start();
-        Thread world = new Thread(main);
         world.start();
+        try {
+            Thread.sleep(5000);
+            hello.interrupt();
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
