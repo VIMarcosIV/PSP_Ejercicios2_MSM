@@ -1,5 +1,4 @@
-package Ejercicio3;
-
+package Ejercicio3Parte2;
 public class Main implements Runnable {
 
     @Override
@@ -21,10 +20,16 @@ public class Main implements Runnable {
     }
 
     public static void main(String[] args) {
-        Main main = new Main();
+        Ejercicio3.Main main = new Ejercicio3.Main();
         Thread world = new Thread(main);
         Thread hello = new Thread(main);
         hello.start();
         world.start();
+        try {
+            Thread.sleep(5000);
+            hello.interrupt();
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
